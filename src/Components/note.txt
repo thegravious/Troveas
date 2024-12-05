@@ -1,0 +1,39 @@
+https://www.behance.net/gallery/143967765/CERAMIC-UTENSILS?tracking_source=search_projects|utensils+website&l=49
+https://in.pinterest.com/pin/2674081024490878/
+
+import React from 'react'
+import img1 from "../img/cursorbg.png"
+
+const Catalog = () => {
+    return (
+        <div className='h-screen'>
+            <div className="kanit-light text-7xl text-center flex items-center justify-center h-[50vh]">
+                CATALOG
+            </div>
+            <div className="kanit-light text-xl text-center flex flex-col items-start justify-around h-[50vh] bg-blue-400">
+                <button style={{
+                    cursor: `url(${img1})16 16, auto`
+                }} className="glass-button bg-[#d3d3d3] pl-14 w-full h-full text-4xl kanit-thin text-black text-start border-b border-t border-black hover:bg-black hover:text-white transition-colors duration-300">
+                    GLASS
+                </button>
+                <button className="plates-button bg-[#d3d3d3] pl-14 w-full h-full text-4xl kanit-thin text-black text-start border-b border-black hover:bg-black hover:text-white transition-colors duration-300">
+                    PLATES
+                </button>
+                <button className="cutlery-button bg-[#d3d3d3] pl-14 w-full h-full text-4xl kanit-thin text-black text-start border-b border-black hover:bg-black hover:text-white transition-colors duration-300">
+                    CUTLERY
+                </button>
+                <button className="cakestand-button bg-[#d3d3d3] pl-14 w-full h-full text-4xl kanit-thin text-black text-start border-b border-black hover:bg-black hover:text-white transition-colors duration-300">
+                    CAKE STAND
+                </button>
+                <button className="tray-button bg-[#d3d3d3] pl-14 w-full h-full text-4xl kanit-thin text-black text-start border-b border-black hover:bg-black hover:text-white transition-colors duration-300">
+                    Tray
+                </button>
+            </div>
+
+
+
+        </div>
+    )
+}
+
+export default Catalog
