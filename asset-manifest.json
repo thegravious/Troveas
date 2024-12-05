@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/Troveas/static/css/main.cedc4eb3.css",
+    "main.js": "/Troveas/static/js/main.545f0572.js",
+    "static/media/1.jpeg": "/Troveas/static/media/1.619ed08a58efe32cc87f.jpeg",
+    "static/media/do not delete this cocomonkey logo.png": "/Troveas/static/media/do not delete this cocomonkey logo.69eac1181ab808f769a0.png",
+    "static/media/4.jpg": "/Troveas/static/media/4.91ec7274f78b05868734.jpg",
+    "static/media/11.jpg": "/Troveas/static/media/11.a95950c595c74f7b3b72.jpg",
+    "static/media/5.jpg": "/Troveas/static/media/5.9853cc3473469a4c8676.jpg",
+    "static/media/12.jpg": "/Troveas/static/media/12.0fc5248ef1753757519e.jpg",
+    "static/media/3.jpg": "/Troveas/static/media/3.145cd2e6030fb3644cd1.jpg",
+    "static/media/logo1.avif": "/Troveas/static/media/logo1.7d794e0ecdce8f4c3f1f.avif",
+    "index.html": "/Troveas/index.html",
+    "main.cedc4eb3.css.map": "/Troveas/static/css/main.cedc4eb3.css.map",
+    "main.545f0572.js.map": "/Troveas/static/js/main.545f0572.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cedc4eb3.css",
+    "static/js/main.545f0572.js"
+  ]
+}
