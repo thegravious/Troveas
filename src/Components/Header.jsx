@@ -1,69 +1,67 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 import imgg from "../img/logo1.avif";
 import { CiUser, CiSearch, CiShoppingCart, CiHome, CiHeart } from "react-icons/ci";
 import "./style.css";
 
 const Header = () => {
   const [isIconOverTestimonial, setIsIconOverTestimonial] = useState(false);
+  const testimonialRef = useRef(null);
+  const iconsContainerRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      const iconsContainer = document.querySelector('.icon-links-container');
-      const testimonial = document.getElementById('testimonial');
+      if (!iconsContainerRef.current || !testimonialRef.current) return;
 
-      if (!iconsContainer || !testimonial) return;
+      const iconsRect = iconsContainerRef.current.getBoundingClientRect();
+      const testimonialRect = testimonialRef.current.getBoundingClientRect();
 
-      const iconsRect = iconsContainer.getBoundingClientRect();
-      const testimonialRect = testimonial.getBoundingClientRect();
-
-      // Check if the icons container is over the testimonial section
-      if (iconsRect.top >= testimonialRect.top && iconsRect.bottom <= testimonialRect.bottom) {
-        setIsIconOverTestimonial(true);
-      } else {
-        setIsIconOverTestimonial(false);
-      }
+      // Check if the icons container is within the testimonial section
+      setIsIconOverTestimonial(
+        iconsRect.bottom >= testimonialRect.top &&
+        iconsRect.top <= testimonialRect.bottom
+      );
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
+  const iconClass = isIconOverTestimonial
+    ? "bg-white text-black"
+    : "bg-black text-white";
+
   return (
     <>
-      <div className="flex justify-between items-start p-2">
+      {/* Header Logo */}
+      <div className="flex justify-between items-start">
         <div className="w-48 relative top-8 left-10">
-          <img src={imgg} alt="Logo" />
+          <img src={imgg} alt="Logo" className="object-contain" />
         </div>
       </div>
 
-      <div className="icon-links-container sticky left-[1900px] z-[1] top-10">
-        <button className="icon-link">
-          <div className={`icon-background ${isIconOverTestimonial ? 'bg-white text-black' : ''}`}>
-            <CiHome />
-          </div>
-        </button>
-        <button className="icon-link">
-          <div className={`icon-background ${isIconOverTestimonial ? 'bg-white text-black' : ''}`}>
-            <CiUser />
-          </div>
-        </button>
-        <button className="icon-link">
-          <div className={`icon-background ${isIconOverTestimonial ? 'bg-white text-black' : ''}`}>
-            <CiSearch />
-          </div>
-        </button>
-        <button className="icon-link">
-          <div className={`icon-background ${isIconOverTestimonial ? 'bg-white text-black' : ''}`}>
-            <CiShoppingCart />
-          </div>
-        </button>
-        <button className="icon-link">
-          <div className={`icon-background ${isIconOverTestimonial ? 'bg-white text-black' : ''}`}>
-            <CiHeart />
-          </div>
-        </button>
+      {/* Sticky Icon Links */}
+      <div
+        className="icon-links-container fixed left-[calc(100%-100px)] top-10 z-[10] flex flex-col gap-4 
+        sm:hidden hidden lg:flex" // Hide on mobile and tablet, visible on medium screens and up
+        ref={iconsContainerRef}
+      >
+        {[
+          { Icon: CiHome, label: "Home" },
+          { Icon: CiUser, label: "User" },
+          { Icon: CiSearch, label: "Search" },
+          { Icon: CiShoppingCart, label: "Cart" },
+          { Icon: CiHeart, label: "Favorites" },
+        ].map(({ Icon, label }, index) => (
+          <button
+            key={index}
+            className={`icon-link p-2 rounded-full transition-all duration-300 ${iconClass}`}
+            aria-label={label}
+          >
+            <Icon className="text-2xl" />
+          </button>
+        ))}
       </div>
     </>
   );

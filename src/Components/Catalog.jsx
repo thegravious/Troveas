@@ -21,10 +21,12 @@ const Catalog = () => {
     const handleMouseMove = (e) => {
       setCursorPos({ x: e.clientX, y: e.clientY });
     };
-    window.addEventListener('mousemove', handleMouseMove);
+
+    const debounceMouseMove = debounce(handleMouseMove, 10); // Debounce function with a delay of 10ms
+    window.addEventListener('mousemove', debounceMouseMove);
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mousemove', debounceMouseMove);
     };
   }, []);
 
@@ -36,6 +38,14 @@ const Catalog = () => {
     setCurrentCursor(null);
   };
 
+  const debounce = (func, delay) => {
+    let timeout;
+    return (...args) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func(...args), delay);
+    };
+  };
+
   return (
     <div className="relative z-[10]">
       <div className="kanit-bold text-7xl text-center flex items-center justify-center h-[40vh]">
@@ -45,9 +55,10 @@ const Catalog = () => {
         {['glass', 'plates', 'cutlery', 'cakeStand', 'tray'].map((item) => (
           <button
             key={item}
-            className="bg-[#d3d3d3] pl-14 w-full h-full text-4xl kanit-thin text-black text-start border-t  border-black hover:bg-black hover:text-white transition-colors duration-300"
+            className="bg-[#d3d3d3] pl-14 w-full h-full text-4xl kanit-thin text-black text-start border-t border-black hover:bg-black hover:text-white transition-colors duration-300"
             onMouseEnter={() => handleMouseEnter(item)}
             onMouseLeave={handleMouseLeave}
+            aria-label={`View details of ${item}`}
           >
             {item.toUpperCase()}
           </button>
@@ -58,14 +69,16 @@ const Catalog = () => {
           src={cursorImages[currentCursor]}
           alt={`${currentCursor} cursor`}
           style={{
-            position: 'fixed', // Using 'fixed' ensures no scrolling issues
+            position: 'fixed',
             left: cursorPos.x + 'px',
             top: cursorPos.y + 'px',
-            transform: 'translate(-50%, -50%)', // Centers image on cursor
-            pointerEvents: 'none', // Allows interactions with buttons below
-            width: '200px', // Adjust size as needed
-            height: '200px',
-            transition: 'transform 0.01s linear', // Makes movement instant
+            transform: 'translate(-50%, -50%)',
+            pointerEvents: 'none',
+            width: '15vw', // Dynamic size based on viewport width
+            height: '15vw',
+            maxWidth: '200px', // Ensures images are not overly large
+            maxHeight: '200px',
+            transition: 'transform 0.01s linear',
           }}
         />
       )}
